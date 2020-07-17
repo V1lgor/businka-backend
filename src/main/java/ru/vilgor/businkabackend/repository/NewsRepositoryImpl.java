@@ -30,4 +30,9 @@ public class NewsRepositoryImpl implements NewsRepository{
                 .setMaxResults(count)
                 .getResultList();
     }
+
+    @Override
+    public News findById(int id) {
+        return entityManager.find(News.class, id);
+    }
 }

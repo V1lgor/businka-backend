@@ -1,10 +1,10 @@
 package ru.vilgor.businkabackend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import ru.vilgor.businkabackend.entity.News;
 import ru.vilgor.businkabackend.service.NewsService;
 
@@ -22,19 +22,30 @@ public class NewsController {
     }
 
     @GetMapping("")
-    public List<News> getNewsPreviewList(
+    public ResponseEntity<List<News>> getNewsPreviewList(
             @RequestParam(value = "count", required = false) Integer newsCount,
             @RequestParam(value = "offset", required = false) Integer offset) {
+        List<News> result;
+        HttpHeaders headers = new HttpHeaders();
         if (newsCount != null) {
             if (offset != null) {
-                return newsService.getNewsPreviewListByCountAndOffset(newsCount, offset);
+                result = newsService.getNewsPreviewListByCountAndOffset(newsCount, offset);
             }
             else {
-                return newsService.getNewsPreviewListByCountAndOffset(newsCount, 0);
+                result = newsService.getNewsPreviewListByCountAndOffset(newsCount, 0);
             }
         }
         else {
-            return newsService.getNewsPreviewList();
+            result = newsService.getNewsPreviewList();
         }
+        headers.add("X-Total-Count", Integer.toString(result.size()));
+        return new ResponseEntity<>(result, headers, HttpStatus.OK);
+    }
+
+
+
+    @GetMapping("/{id}")
+    public News getNewsItemById(@PathVariable int id) {
+        return newsService.getNewsItemById(id);
     }
 }

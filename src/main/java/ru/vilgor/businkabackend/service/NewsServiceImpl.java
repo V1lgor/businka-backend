@@ -44,6 +44,11 @@ public class NewsServiceImpl implements NewsService {
         return newsPreviewList;
     }
 
+    @Override
+    public News getNewsItemById(int id) {
+        return newsRepository.findById(id);
+    }
+
     private static String truncateAfterWordsCount(int n, String s) {
         if (s == null) return null;
         Matcher matcher = SPACES_PATTERN.matcher(s);
