@@ -14,6 +14,10 @@ public class Product {
     @Column(name = "prod_name")
     private String name;
 
+    @ManyToOne
+    @JoinColumn(name = "prod_category_id")
+    private Category category;
+
     @Column(name = "prod_code")
     private String code;
 
@@ -25,8 +29,9 @@ public class Product {
 
     public Product() {}
 
-    public Product(String name, String code, double price, boolean hidden) {
+    public Product(String name, Category category, String code, double price, boolean hidden) {
         this.name = name;
+        this.category = category;
         this.code = code;
         this.price = price;
         this.hidden = hidden;
@@ -46,6 +51,14 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public String getCode() {
