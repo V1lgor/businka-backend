@@ -21,4 +21,9 @@ public class ProductRepositoryImpl implements ProductRepository {
     public List<Product> findAll() {
         return entityManager.createQuery("from Product", Product.class).getResultList();
     }
+
+    @Override
+    public Product find(Integer id) {
+        return entityManager.find(Product.class, id);
+    }
 }

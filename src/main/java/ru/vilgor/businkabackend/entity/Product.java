@@ -1,6 +1,7 @@
 package ru.vilgor.businkabackend.entity;
 
 import javax.persistence.*;
+import java.awt.*;
 
 @Entity
 @Table(name = "Product")
@@ -24,16 +25,20 @@ public class Product {
     @Column(name = "prod_price")
     private double price;
 
+    @Column(name = "prod_image_filename")
+    private String imageFilename;
+
     @Column(name = "prod_hidden")
     private boolean hidden;
 
     public Product() {}
 
-    public Product(String name, Category category, String code, double price, boolean hidden) {
+    public Product(String name, Category category, String code, double price, String imageFilename, boolean hidden) {
         this.name = name;
         this.category = category;
         this.code = code;
         this.price = price;
+        this.imageFilename = imageFilename;
         this.hidden = hidden;
     }
 
@@ -75,6 +80,14 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getImageFilename() {
+        return imageFilename;
+    }
+
+    public void setImageFilename(String imageFilename) {
+        this.imageFilename = imageFilename;
     }
 
     public boolean isHidden() {
