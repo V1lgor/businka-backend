@@ -8,4 +8,6 @@ public interface CategoryRepository {
     List<Category> findAll();
 
     List<Category> findRootCategoryList();
+
+    Category findById(int id);
 }

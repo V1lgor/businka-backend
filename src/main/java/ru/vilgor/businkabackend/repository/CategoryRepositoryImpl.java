@@ -27,4 +27,9 @@ public class CategoryRepositoryImpl implements CategoryRepository {
         return entityManager.createQuery("from Category where parentCategory = null", Category.class)
                 .getResultList();
     }
+
+    @Override
+    public Category findById(int id) {
+        return entityManager.find(Category.class, id);
+    }
 }

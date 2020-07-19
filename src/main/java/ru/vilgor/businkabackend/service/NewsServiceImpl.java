@@ -23,30 +23,29 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public List<News> getNewsPreviewListByCountAndOffset(int count, int offset) {
-        List<News> newsPreviewList = newsRepository.findByCountAndOffset(count, offset);
+    public List<News> getNewsPreviewList(int page, int pageSize) {
+        List<News> newsList = newsRepository.findByCountAndOffset(pageSize, page * pageSize);
 
-        for (News news : newsPreviewList) {
-            news.setText(truncateAfterWordsCount(NEWS_PREVIEW_WORD_COUNT, news.getText()));
-        }
-
-        return newsPreviewList;
+        return makeNewsPreviewList(newsList);
     }
 
     @Override
     public List<News> getNewsPreviewList() {
-        List<News> newsPreviewList = newsRepository.findAll();
+        List<News> newsList = newsRepository.findAll();
 
-        for (News news : newsPreviewList) {
-            news.setText(truncateAfterWordsCount(NEWS_PREVIEW_WORD_COUNT, news.getText()));
-        }
-
-        return newsPreviewList;
+        return makeNewsPreviewList(newsList);
     }
 
     @Override
     public News getNewsItemById(int id) {
         return newsRepository.findById(id);
+    }
+
+    private List<News> makeNewsPreviewList(List<News> newsList) {
+        for (News news : newsList) {
+            news.setText(truncateAfterWordsCount(NEWS_PREVIEW_WORD_COUNT, news.getText()));
+        }
+        return newsList;
     }
 
     private static String truncateAfterWordsCount(int n, String s) {

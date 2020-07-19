@@ -7,7 +7,17 @@ import java.util.List;
 public interface ProductRepository {
     List<Product> findAll();
 
+    List<Product> findByCountAndOffset(int count, int offset);
+
     Product find(Integer id);
+
+    List<Product> findByCategoryId(int categoryId);
+
+    List<Product> findByCategoryId(int categoryId, int count, int offset);
+
+    List<Product> findByCategoryIdList(List<Integer> categoryIdList);
+
+    List<Product> findByCategoryIdList(List<Integer> categoryIdList, int count, int offset);
 
     void detachEntity(Object entity);
 }

@@ -23,23 +23,24 @@ public class NewsController {
 
     @GetMapping("")
     public ResponseEntity<List<News>> getNewsPreviewList(
-            @RequestParam(value = "count", required = false) Integer newsCount,
-            @RequestParam(value = "offset", required = false) Integer offset) {
-        List<News> result;
+            @RequestParam(value = "page", required = false) Integer pageNumber,
+            @RequestParam(value = "size", required = false) Integer pageSize) {
+
+        List<News> newsList;
         HttpHeaders headers = new HttpHeaders();
-        if (newsCount != null) {
-            if (offset != null) {
-                result = newsService.getNewsPreviewListByCountAndOffset(newsCount, offset);
-            }
-            else {
-                result = newsService.getNewsPreviewListByCountAndOffset(newsCount, 0);
-            }
+        if (pageSize == null) {
+            newsList = newsService.getNewsPreviewList();
         }
         else {
-            result = newsService.getNewsPreviewList();
+            if (pageNumber == null) {
+                newsList = newsService.getNewsPreviewList(0, pageSize);
+            }
+            else {
+                newsList = newsService.getNewsPreviewList(pageNumber, pageSize);
+            }
         }
-        headers.add("X-Total-Count", Integer.toString(result.size()));
-        return new ResponseEntity<>(result, headers, HttpStatus.OK);
+        headers.add("X-Total-Count", Integer.toString(newsList.size()));
+        return new ResponseEntity<>(newsList, headers, HttpStatus.OK);
     }
 
 

@@ -26,4 +26,9 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> getCategoryListHierarchy() {
         return categoryRepository.findRootCategoryList();
     }
+
+    @Override
+    public Category getCategoryById(int id) {
+        return categoryRepository.findById(id);
+    }
 }

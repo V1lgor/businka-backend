@@ -7,5 +7,8 @@ import java.util.List;
 
 public interface CategoryService {
     public List<Category> getCategoryList();
+
     public List<Category> getCategoryListHierarchy();
+
+    Category getCategoryById(int id);
 }
