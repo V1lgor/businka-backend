@@ -7,6 +7,4 @@ import java.util.List;
 
 public interface ProductService {
     List<Product> getAllProducts();
-
-    byte[] getProductImage(int id) throws ImageFileNotFoundException;
 }

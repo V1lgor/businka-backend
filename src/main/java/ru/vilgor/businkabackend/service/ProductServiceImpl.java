@@ -1,6 +1,7 @@
 package ru.vilgor.businkabackend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.vilgor.businkabackend.entity.Product;
@@ -12,24 +13,27 @@ import java.util.List;
 @Service
 public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
-    private ImageService imageService;
+
+    private Environment environment;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, ImageService imageService) {
+    public ProductServiceImpl(ProductRepository productRepository, Environment environment) {
         this.productRepository = productRepository;
-        this.imageService = imageService;
+        this.environment = environment;
     }
+
 
 
     @Override
     @Transactional
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
-    }
+        List<Product> productList = productRepository.findAll();
 
-    @Override
-    public byte[] getProductImage(int id) throws ImageFileNotFoundException {
-        Product product = productRepository.find(id);
-        return imageService.getImageByPath("static/images/product/" + product.getImageFilename());
+        for (Product product : productList) {
+            productRepository.detachEntity(product);
+            product.setImageURL("http://localhost:" + environment.getProperty("server.port") + product.getImageURL());
+        }
+
+        return productList;
     }
 }

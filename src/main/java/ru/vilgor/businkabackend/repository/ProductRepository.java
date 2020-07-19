@@ -5,7 +5,9 @@ import ru.vilgor.businkabackend.entity.Product;
 import java.util.List;
 
 public interface ProductRepository {
-    public List<Product> findAll();
+    List<Product> findAll();
 
-    public Product find(Integer id);
+    Product find(Integer id);
+
+    void detachEntity(Object entity);
 }

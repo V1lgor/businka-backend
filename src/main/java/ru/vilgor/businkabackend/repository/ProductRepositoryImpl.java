@@ -5,11 +5,13 @@ import org.springframework.stereotype.Repository;
 import ru.vilgor.businkabackend.entity.Product;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 public class ProductRepositoryImpl implements ProductRepository {
 
+    @PersistenceContext
     private EntityManager entityManager;
 
     @Autowired
@@ -25,5 +27,9 @@ public class ProductRepositoryImpl implements ProductRepository {
     @Override
     public Product find(Integer id) {
         return entityManager.find(Product.class, id);
+    }
+
+    public void detachEntity(Object entity) {
+        entityManager.detach(entity);
     }
 }
