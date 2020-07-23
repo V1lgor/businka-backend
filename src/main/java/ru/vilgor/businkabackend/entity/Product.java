@@ -24,19 +24,24 @@ public class Product {
     @Column(name = "prod_price")
     private double price;
 
+    @Column(name = "prod_discount")
+    private int discount;
+
     @Column(name = "prod_image_url")
     private String imageURL;
 
     @Column(name = "prod_hidden")
     private boolean hidden;
 
+
     public Product() {}
 
-    public Product(String name, Category category, String code, double price, String imageURL, boolean hidden) {
+    public Product(String name, Category category, String code, double price, int discount, String imageURL, boolean hidden) {
         this.name = name;
         this.category = category;
         this.code = code;
         this.price = price;
+        this.discount = discount;
         this.imageURL = imageURL;
         this.hidden = hidden;
     }
@@ -79,6 +84,14 @@ public class Product {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(int discount) {
+        this.discount = discount;
     }
 
     public String getImageURL() {
