@@ -12,4 +12,6 @@ public interface ProductService {
     List<Product> getProductListByCategoryId(int categoryId);
 
     List<Product> getProductListByCategoryId(int categoryId, int pageNumber, int pageSize);
+
+    List<Product> getProductListByIdList(List<Integer> idList);
 }

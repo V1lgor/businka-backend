@@ -109,4 +109,8 @@ public class Product {
     public void setHidden(boolean hidden) {
         this.hidden = hidden;
     }
+
+    public double getPriceWithDiscount() {
+        return price * (100 - discount) / 100;
+    }
 }

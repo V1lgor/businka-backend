@@ -102,4 +102,9 @@ public class ProductServiceImpl implements ProductService {
 
         return productList;
     }
+
+    @Override
+    public List<Product> getProductListByIdList(List<Integer> idList) {
+        return productRepository.findByIdList(idList);
+    }
 }

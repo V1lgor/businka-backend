@@ -2,7 +2,6 @@ package ru.vilgor.businkabackend.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.vilgor.businkabackend.entity.News;
 import ru.vilgor.businkabackend.entity.Product;
 
 import javax.persistence.EntityManager;
@@ -71,6 +70,13 @@ public class ProductRepositoryImpl implements ProductRepository {
                 .setParameter("categoryIdList", categoryIdList)
                 .setFirstResult(offset)
                 .setMaxResults(count)
+                .getResultList();
+    }
+
+    @Override
+    public List<Product> findByIdList(List<Integer> idList) {
+        return entityManager.createQuery("from Product where id in (:idList)", Product.class)
+                .setParameter("idList", idList)
                 .getResultList();
     }
 }

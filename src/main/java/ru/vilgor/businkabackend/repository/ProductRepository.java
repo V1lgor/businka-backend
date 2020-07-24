@@ -19,5 +19,7 @@ public interface ProductRepository {
 
     List<Product> findByCategoryIdList(List<Integer> categoryIdList, int count, int offset);
 
+    List<Product> findByIdList(List<Integer> idList);
+
     void detachEntity(Object entity);
 }
