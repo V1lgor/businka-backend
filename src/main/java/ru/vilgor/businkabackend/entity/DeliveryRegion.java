@@ -1,5 +1,8 @@
 package ru.vilgor.businkabackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import ru.vilgor.businkabackend.jsonview.View;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,14 +12,18 @@ public class DeliveryRegion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "region_id")
+    @JsonView(View.Public.class)
     private int id;
 
+    @JsonView(View.Public.class)
     @Column(name = "region_name")
     private String name;
 
+    @JsonView(View.Public.class)
     @Column(name = "region_code")
     private String code;
 
+    @JsonView(View.Nested.class)
     @OneToMany(mappedBy = "region")
     private List<DeliveryCity> cityList;
 
