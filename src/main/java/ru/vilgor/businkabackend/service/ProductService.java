@@ -14,4 +14,10 @@ public interface ProductService {
     List<Product> getProductListByCategoryId(int categoryId, int pageNumber, int pageSize);
 
     List<Product> getProductListByIdList(List<Integer> idList);
+
+    int save(Product product);
+
+    void update(int id, Product product);
+
+    void delete(int id);
 }

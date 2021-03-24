@@ -8,19 +8,19 @@ import java.util.Objects;
 @Embeddable
 public class OrderProductId implements Serializable {
     @Column(name = "order_id")
-    private int orderId;
+    private Integer orderId;
 
     @Column(name = "product_id")
     private int productId;
 
     public OrderProductId() {}
 
-    public OrderProductId(int orderId, int productId) {
+    public OrderProductId(Integer orderId, int productId) {
         this.orderId = orderId;
         this.productId = productId;
     }
 
-    public int getOrderId() {
+    public Integer getOrderId() {
         return orderId;
     }
 
@@ -51,5 +51,13 @@ public class OrderProductId implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(orderId, productId);
+    }
+
+    @Override
+    public String toString() {
+        return "OrderProductId{" +
+                "orderId=" + orderId +
+                ", productId=" + productId +
+                '}';
     }
 }

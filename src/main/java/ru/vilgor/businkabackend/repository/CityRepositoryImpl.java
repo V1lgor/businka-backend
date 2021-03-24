@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import ru.vilgor.businkabackend.entity.DeliveryCity;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 
 @Repository
 public class CityRepositoryImpl implements CityRepository {
@@ -19,5 +20,12 @@ public class CityRepositoryImpl implements CityRepository {
     @Override
     public DeliveryCity find(int id) {
         return entityManager.find(DeliveryCity.class, id);
+    }
+
+    @Override
+    public List<DeliveryCity> findByRegionId(int regionId) {
+        return entityManager.createQuery("from DeliveryCity where region.id = :regionId", DeliveryCity.class)
+                .setParameter("regionId", regionId)
+                .getResultList();
     }
 }

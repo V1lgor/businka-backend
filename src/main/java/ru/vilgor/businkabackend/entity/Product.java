@@ -9,7 +9,7 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="prod_id")
-    private int id;
+    private Integer id;
 
     @Column(name = "prod_name")
     private String name;
@@ -22,16 +22,16 @@ public class Product {
     private String code;
 
     @Column(name = "prod_price")
-    private double price;
+    private Double price;
 
     @Column(name = "prod_discount")
-    private int discount;
+    private Integer discount;
 
     @Column(name = "prod_image_url")
     private String imageURL;
 
     @Column(name = "prod_hidden")
-    private boolean hidden;
+    private Boolean hidden;
 
 
     public Product() {}
@@ -46,11 +46,11 @@ public class Product {
         this.hidden = hidden;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -78,19 +78,19 @@ public class Product {
         this.code = code;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public int getDiscount() {
+    public Integer getDiscount() {
         return discount;
     }
 
-    public void setDiscount(int discount) {
+    public void setDiscount(Integer discount) {
         this.discount = discount;
     }
 
@@ -102,15 +102,22 @@ public class Product {
         this.imageURL = imageURL;
     }
 
-    public boolean isHidden() {
+    public Boolean isHidden() {
         return hidden;
     }
 
-    public void setHidden(boolean hidden) {
+    public void setHidden(Boolean hidden) {
         this.hidden = hidden;
     }
 
     public double getPriceWithDiscount() {
         return price * (100 - discount) / 100;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' + "}";
     }
 }

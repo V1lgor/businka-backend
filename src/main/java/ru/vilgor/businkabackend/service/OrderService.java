@@ -1,7 +1,7 @@
 package ru.vilgor.businkabackend.service;
 
-import ru.vilgor.businkabackend.dto.OrderDto;
+import ru.vilgor.businkabackend.entity.Order;
 
 public interface OrderService {
-    void saveOrder(OrderDto orderDto);
+    void saveOrder(Order order);
 }

@@ -10,5 +10,13 @@ public interface CategoryService {
 
     public List<Category> getCategoryListHierarchy();
 
+    public boolean categoryExists(Category category);
+
     Category getCategoryById(int id);
+
+    int save(Category category);
+
+    void update(int id, Category category);
+
+    void delete(int id);
 }

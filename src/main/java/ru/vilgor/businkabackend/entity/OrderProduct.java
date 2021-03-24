@@ -3,17 +3,17 @@ package ru.vilgor.businkabackend.entity;
 import javax.persistence.*;
 
 @Entity(name = "ProductsInOrder")
+@Table(name = "ProductsInOrder")
 public class OrderProduct {
-
     @EmbeddedId
     private OrderProductId id;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "order_id")
     @MapsId("orderId")
     private Order order;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "product_id")
     @MapsId("productId")
     private Product product;
@@ -86,5 +86,16 @@ public class OrderProduct {
 
     public void setDiscount(int discount) {
         this.discount = discount;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderProduct{" +
+                "id=" + id +
+                ", product=" + product +
+                ", count=" + count +
+                ", price=" + price +
+                ", discount=" + discount +
+                '}';
     }
 }

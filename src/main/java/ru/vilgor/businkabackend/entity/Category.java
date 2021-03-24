@@ -2,6 +2,8 @@ package ru.vilgor.businkabackend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
+import ru.vilgor.businkabackend.jsonview.CategoryView;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,28 +14,35 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
-    private int id;
+    @JsonView(CategoryView.Public.class)
+    private Integer id;
 
     @Column(name = "category_name")
+    @JsonView(CategoryView.Public.class)
     private String name;
 
     @ManyToOne
     @JoinColumn(name = "parent_category_id")
-    @JsonIgnore
+    @JsonView(CategoryView.WithParent.class)
     private Category parentCategory;
 
-    @OneToMany(mappedBy = "parentCategory")
+    @OneToMany(mappedBy = "parentCategory", cascade = {CascadeType.REMOVE})
+    @JsonView(CategoryView.WithChildren.class)
     private List<Category> childCategoryList;
+
+    @OneToMany(mappedBy = "category", cascade = {CascadeType.REMOVE})
+    @JsonIgnore
+    private List<Product> productList;
 
     public Category() {
 
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -59,5 +68,13 @@ public class Category {
 
     public void setChildCategoryList(List<Category> childCategoryList) {
         this.childCategoryList = childCategoryList;
+    }
+
+    public List<Product> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
     }
 }

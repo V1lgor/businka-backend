@@ -61,5 +61,15 @@ public class OrderDeliveryInfo {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "OrderDeliveryInfo{" +
+                "id=" + id +
+                ", city=" + city +
+                ", address='" + address + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }
 

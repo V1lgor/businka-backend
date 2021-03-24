@@ -24,10 +24,10 @@ public class Order {
     @Column(name = "order_total_cost")
     private double totalCost;
 
-    @OneToMany(mappedBy = "product", cascade = {CascadeType.PERSIST})
+    @OneToMany(mappedBy = "product", cascade = {CascadeType.ALL})
     private List<OrderProduct> productList;
 
-    @OneToOne(cascade = {CascadeType.PERSIST})
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "order_delivery_id")
     private OrderDeliveryInfo deliveryInfo;
 
@@ -95,5 +95,18 @@ public class Order {
 
     public void setDeliveryInfo(OrderDeliveryInfo deliveryInfo) {
         this.deliveryInfo = deliveryInfo;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", userName='" + userName + '\n' +
+                ", userEmail='" + userEmail + '\n' +
+                ", date=" + date + '\n' +
+                ", totalCost=" + totalCost +'\n' +
+                ", productList=" + productList +'\n' +
+                ", deliveryInfo=" + deliveryInfo +'\n' +
+                '}';
     }
 }

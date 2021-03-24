@@ -10,4 +10,11 @@ public interface CategoryRepository {
     List<Category> findRootCategoryList();
 
     Category findById(int id);
+    Category findByName(String name);
+
+    int save(Category category);
+
+    void update(int id, Category category);
+
+    void delete(int id);
 }
